@@ -941,7 +941,7 @@ Project Statuses Page
 */
 
 .pstatus_column {
-  width:320px;
+  width:324px;
   padding: 10px 10px 0;
   margin: 0 10px;
   background-color: #efefef;
@@ -952,14 +952,26 @@ Project Statuses Page
 .pstatus_column h3 {
   margin: 0 0 15px;
 }
+.pstatus_wrapper {
+	min-height: 50px;
+	margin-bottom: 10px;
+	border: 1px dashed transparent;
+	border-radius: 5px;
+}
+.pstatus_wrapper.activeDragging {
+	border-color: #ccc;
+}
 
 .pstatus_proj {
   width:300px;
   padding: 10px;
-  margin: 0 0 10px;
+  margin-bottom: 10px;
   background-color: #fcfcfc;
   border-radius: 5px;
   box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+.pstatus_proj:last-child {
+	margin-bottom: 0;
 }
 .pstatus_proj h4 {
   margin: 0 0 5px;
@@ -971,6 +983,27 @@ Project Statuses Page
   transform: rotate(-2deg);
   -moz-transform: rotate(-2deg);
   -webkit-transform: rotate(-2deg);
+}
+.pstatus_proj.selected {
+	background-color: #feffe1;
+}
+.pstatus_proj.multiDrag:after, .pstatus_proj.multiDrag:before {
+	content: " ";
+	position: absolute;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-radius: 5px;
+}
+.pstatus_proj.multiDrag:after {
+	z-index: 100;
+	top: 0; left: 0;
+	bottom: 0; right: 0;
+}
+.pstatus_proj.multiDrag:before {
+	z-index: -100;
+	top: 5px; left: 5px;
+	right: -5px; bottom: -5px;
+	background-color: #feffe1;
 }
 
 

@@ -11,60 +11,251 @@ Description: Trello - like display of projects. Statuses and reponsibles etc.
 
 <h1 id="page_title">Project Statuses</h1>
 
-<div id="pstatus_wrapper">
-    <div class="pstatus_column" id="reception_control">
-        <h3>Reception Control</h3>
-        <div class="pstatus_proj draggable">
-            <h4>S.Lehman_14_01</h4>
-            <span class="pstatus_responsible pull-right label label-default">Phil Ewels</span>
-            <span class="pstatus_prod_app label label-primary">P</span>
-            <span class="pstatus_application label label-success">RNA-seq (total RNA)</span>
-            <div class="clearfix"></div>
-        </div>
-        <div class="pstatus_proj draggable">
-            <h4>S.Lehman_14_01</h4>
-            <span class="pstatus_responsible pull-right label label-default">Phil Ewels</span>
-            <span class="pstatus_prod_app label label-primary">P</span>
-            <span class="pstatus_application label label-success">RNA-seq (total RNA)</span>
-            <div class="clearfix"></div>
-        </div>
-        <div class="pstatus_proj draggable">
-            <h4>S.Lehman_14_01</h4>
-            <span class="pstatus_responsible pull-right label label-default">Phil Ewels</span>
-            <span class="pstatus_prod_app label label-primary">P</span>
-            <span class="pstatus_application label label-success">RNA-seq (total RNA)</span>
-            <div class="clearfix"></div>
-        </div>
+<h2 id="page_loading" style="color: red;">Loading</h2>
+
+<div class="row">
+  <div class="col-sm-4">
+    <h4>Active Filters</h4>
+    <dl class="dl-horizontal">
+      <dt>Responsible</dt>
+      <dd>Everyone</dd>
+      
+      <dt>Project Type</dt>
+      <dd>Production &amp; Applications</dd>
+      
+      <dt>Application Types</dt>
+      <dd>Everything</dd>
+    </dl>
+  </div>
+  <div class="col-sm-4">
+    <h4>Set Filters</h4>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Responsible <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#">Everyone</a></li>
+        <li><a href="#">Just Me (Phil Ewels)</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">Bahram</a></li>
+        <li><a href="#">Denis</a></li>
+        <li><a href="#">Marianna</a></li>
+        <li><a href="#">Phil</a></li>
+        <li><a href="#">Sverker</a></li>
+      </ul>
     </div>
-    <div class="pstatus_column" id="reception_control">
-        <h3>Library Prep</h3>
-        <div class="pstatus_proj draggable">
-            <h4>S.Lehman_14_01</h4>
-            <span class="pstatus_responsible pull-right label label-default">Phil Ewels</span>
-            <span class="pstatus_prod_app label label-primary">P</span>
-            <span class="pstatus_application label label-success">RNA-seq (total RNA)</span>
-            <div class="clearfix"></div>
-        </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Project Type <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#">Everything</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">Production</a></li>
+        <li><a href="#">Applications</a></li>
+      </ul>
     </div>
-    <div class="pstatus_column" id="reception_control">
-        <h3>Sequencing</h3>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Application <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#">Everything</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">RNA-Seq</a></li>
+        <li><a href="#">RNA-Seq</a></li>
+        <li><a href="#">RNA-Seq</a></li>
+        <li><a href="#">RNA-Seq</a></li>
+      </ul>
     </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Project Age <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#">Everything</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">&gt; 28 days</a></li>
+        <li><a href="#">&gt; 14 days</a></li>
+        <li><a href="#">&lt; 7 days</a></li>
+        <li><a href="#">&lt; 2 days</a></li>
+      </ul>
+    </div>
+    <input type="text" class="form-control input-sm" placeholder="Search" style="display: inline-block; width: 200px; margin:10px 0 0;">
+  </div>
+  <div class="col-sm-4">
+    <h4>Actions</h4>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Set Responsible <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#">Me (Phil Ewels)</a></li>
+        <li><a href="#">Clear (no-one)</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">Bahram</a></li>
+        <li><a href="#">Denis</a></li>
+        <li><a href="#">Marianna</a></li>
+        <li><a href="#">Phil</a></li>
+        <li><a href="#">Sverker</a></li>
+      </ul>
+    </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sort <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#">Age</a></li>
+        <li><a href="#">Name</a></li>
+        <li><a href="#">ID</a></li>
+        <li><a href="#">Project Type</a></li>
+        <li><a href="#">Application</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="pstatus_column" id="reception_control">
+  <h3>
+    <button class="btn btn-sm btn-default pull-right pstatus_selectAll">Select All</button>
+    Reception Control
+  </h3>
+  <div class="pstatus_wrapper"></div>
+</div>
+<div class="pstatus_column" id="library_prep">
+    <h3>
+      <button class="btn btn-sm btn-default pull-right pstatus_selectAll">Select All</button>
+      Library Prep
+    </h3>
+    <div class="pstatus_wrapper"></div>
+</div>
+<div class="pstatus_column" id="sequencing">
+    <h3>
+      <button class="btn btn-sm btn-default pull-right pstatus_selectAll">Select All</button>
+      Sequencing
+    </h3>
+    <div class="pstatus_wrapper"></div>
 </div>
 
 
 <script src="/static/js/jquery-ui.min.js"></script>
+<script src="/static/js/moment.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-    $( ".pstatus_column" ).sortable({
-        connectWith: ".pstatus_column",
-        start: function (event, ui) {
-            ui.item.addClass('tilt');
-        },
-        stop: function (event, ui) {
-            ui.item.removeClass('tilt');
+  
+    // Remove default moment.js 'ago' from relative time
+    moment.locale('en', {
+      relativeTime : {
+        future: "in %s",
+        past:   "%s",
+        s:  "seconds",
+        m:  "a minute",
+        mm: "%d minutes",
+        h:  "an hour",
+        hh: "%d hours",
+        d:  "a day",
+        dd: "%d days",
+        M:  "a month",
+        MM: "%d months",
+        y:  "a year",
+        yy: "%d years"
+      }
+    });
+    
+    // Wait for the data to load.
+    $.when(load_data('#reception_control'), load_data('#library_prep'), load_data('#sequencing')).done(function(){
+      
+      $('#page_loading').remove();
+        
+      // Remove selected statuses if click whitespace
+      $('body').click(function(e){
+        if ( $(e.target).hasClass('container-fluid') ){
+          $('.pstatus_proj').removeClass('selected');
         }
+      });
+      
+      // Select all buttons
+      $('.pstatus_selectAll').click(function(e){
+        e.preventDefault();
+        $(this).closest('.pstatus_column').find('.pstatus_proj').addClass('selected');
+      });
+      
+      // Project events
+      $('.pstatus_wrapper').on('click', '.pstatus_proj', function(e){
+        if (e.ctrlKey || e.metaKey) {
+          $(this).toggleClass('selected');
+        } else {
+          $('.pstatus_proj').removeClass('selected');
+          $(this).addClass('selected');
+        }
+      }).sortable({
+        connectWith: '.pstatus_wrapper',
+        delay: 150, // wait to see if this is a click
+        revert: 0,
+        start: function (e, ui) {
+          
+          ui.item.addClass('tilt');
+          
+          // Add target zones for lists
+          $('.pstatus_wrapper').addClass('activeDragging');
+          
+          // This wasn't selected yet - unselect everything else
+          if (!ui.item.hasClass('selected')) {
+            $('.pstatus_proj').removeClass('selected');
+            ui.item.addClass('selected');
+          }
+          
+          // Clone and remove any other selected items
+          var os = $('.selected:not(.tilt):not(.ui-sortable-placeholder)');
+          if(os.length > 0){
+            ui.item.addClass('multiDrag');
+          }
+          ui.item.data('other_selected', os.clone()); // save in item.data
+          os.remove();
+          
+        },
+        stop: function (e, ui) {
+          
+          // Get other selected projects and insert them afterwards
+          var elements = ui.item.data('other_selected');
+          ui.item.after(elements);
+          
+          // Strip the classes
+          $('.pstatus_proj').removeClass('tilt multiDrag');
+          $('.pstatus_wrapper').removeClass('activeDragging');
+          
+        }
+      });
+      
     });
 });
+
+function load_data(target){
+  // Load the data
+  var urls = {
+    '#reception_control': '/api/v1/projects?list=reception_control',
+    '#library_prep': '/api/v1/projects?list=ongoing',
+    // TODO - don't have a URL for this yet
+    '#sequencing': '/api/v1/projects?list=pending_review',
+  };
+  return $.getJSON(urls[target], function(data) {
+    // console.log(data);
+    $.each(data, function(project_id, proj) {
+      var age = moment(proj.open_date, 'YYYY-MM-DD').fromNow();
+      $(target+' .pstatus_wrapper').append('<div class="pstatus_proj draggable">\
+          <h4><small><span class="pstats_num_samples label label-warning pull-right">'+age+'</span></small>\
+          '+proj.project_name+' <small>'+project_id+'</small></h4>\
+          <span class="pstatus_responsible pull-right label label-default">Phil Ewels</span>\
+          <span class="pstatus_prod_app label label-primary">'+proj.type.substr(0,1)+'</span>\
+          <span class="pstatus_application label label-success">'+proj.application+'</span>\
+          <span class="pstats_num_samples label label-info">'+proj.no_samples+' samples</span>\
+          <div class="clearfix"></div>\
+      </div>');
+    });
+  });
+}
 </script>
 
 {% end %}
