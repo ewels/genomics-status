@@ -932,3 +932,46 @@ button.btn:disabled {
   line-height: 13px;
   margin: 4px 0;
 }
+
+
+
+/*
+Project Statuses Page
+=====================
+*/
+
+.pstatus_column {
+  width:320px;
+  padding: 10px 10px 0;
+  margin: 0 10px;
+  background-color: #efefef;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  float: left;
+}
+.pstatus_column h3 {
+  margin: 0 0 15px;
+}
+
+.pstatus_proj {
+  width:300px;
+  padding: 10px;
+  margin: 0 0 10px;
+  background-color: #fcfcfc;
+  border-radius: 5px;
+  box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+.pstatus_proj h4 {
+  margin: 0 0 5px;
+}
+.pstatus_proj.draggable {
+  cursor: pointer;
+}
+.pstatus_proj.tilt {
+  transform: rotate(-2deg);
+  -moz-transform: rotate(-2deg);
+  -webkit-transform: rotate(-2deg);
+}
+
+
+

@@ -33,7 +33,7 @@ from status.production import DeliveredMonthlyDataHandler, DeliveredMonthlyPlotH
 from status.projects import BioinfoAnalysisHandler, CaliperImageHandler, CharonProjectHandler, DeliveriesPageHandler, \
     LinksDataHandler, PresetsHandler, ProjectDataHandler, ProjectQCDataHandler, ProjectSamplesDataHandler, ProjectSamplesHandler, \
     ProjectsDataHandler, ProjectsFieldsDataHandler, ProjectsHandler, ProjectsSearchHandler, ProjectSummaryHandler, \
-    ProjectSummaryUpdateHandler, ProjectTicketsDataHandler, RunningNotesDataHandler, UppmaxProjectsDataHandler
+    ProjectSummaryUpdateHandler, ProjectTicketsDataHandler, RunningNotesDataHandler, UppmaxProjectsDataHandler, ProjectStatusPage
 
 from status.quotas import QuotaDataHandler, QuotaHandler, QuotasHandler
 from status.q30 import Q30Handler, Q30PlotHandler
@@ -190,6 +190,7 @@ class Application(tornado.web.Application):
             ("/samples/([^/]*)$", SampleRunHandler),
             ("/sequencing", SequencingStatsHandler),
             ("/suggestion_box", SuggestionBoxHandler),
+            ("/status", ProjectStatusPage),
             ("/worksets", WorksetsHandler),
             ("/workset/([^/]*)$", WorksetHandler),
             (r'.*', BaseHandler)
@@ -312,6 +313,7 @@ class Application(tornado.web.Application):
             tornado.autoreload.watch("design/samples.html")
             tornado.autoreload.watch("design/sequencing_stats.html")
             tornado.autoreload.watch("design/suggestion_box.html")
+            tornado.autoreload.watch("design/statuses.html")
             tornado.autoreload.watch("design/unauthorized.html")
             tornado.autoreload.watch("design/login.html")
 

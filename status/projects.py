@@ -795,6 +795,17 @@ class DeliveriesPageHandler(SafeHandler):
                                       prettify = prettify_css_names
                                       ))
 
+class ProjectStatusPage(SafeHandler):
+        """ Serves a page which has a trello-like view of project status / responsible etc
+        URL: /status/)
+        """
+        def get(self):
+            t = self.application.loader.load("statuses.html")
+            self.write(t.generate(gs_globals=self.application.gs_globals,
+                                      user=self.get_current_user_name(),
+                                      prettify = prettify_css_names
+                                      ))
+
 
 
 class ProjectSummaryHandler(SafeHandler):

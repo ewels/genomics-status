@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+<!--
+Template file: statuses.html
+URL: /status/
+Title: Project Statuses Page
+Description: Trello - like display of projects. Statuses and reponsibles etc.
+-->
+
+{% block stuff %}
+
+<h1 id="page_title">Project Statuses</h1>
+
+<div id="pstatus_wrapper">
+    <div class="pstatus_column" id="reception_control">
+        <h3>Reception Control</h3>
+        <div class="pstatus_proj draggable">
+            <h4>S.Lehman_14_01</h4>
+            <span class="pstatus_responsible pull-right label label-default">Phil Ewels</span>
+            <span class="pstatus_prod_app label label-primary">P</span>
+            <span class="pstatus_application label label-success">RNA-seq (total RNA)</span>
+            <div class="clearfix"></div>
+        </div>
+        <div class="pstatus_proj draggable">
+            <h4>S.Lehman_14_01</h4>
+            <span class="pstatus_responsible pull-right label label-default">Phil Ewels</span>
+            <span class="pstatus_prod_app label label-primary">P</span>
+            <span class="pstatus_application label label-success">RNA-seq (total RNA)</span>
+            <div class="clearfix"></div>
+        </div>
+        <div class="pstatus_proj draggable">
+            <h4>S.Lehman_14_01</h4>
+            <span class="pstatus_responsible pull-right label label-default">Phil Ewels</span>
+            <span class="pstatus_prod_app label label-primary">P</span>
+            <span class="pstatus_application label label-success">RNA-seq (total RNA)</span>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="pstatus_column" id="reception_control">
+        <h3>Library Prep</h3>
+        <div class="pstatus_proj draggable">
+            <h4>S.Lehman_14_01</h4>
+            <span class="pstatus_responsible pull-right label label-default">Phil Ewels</span>
+            <span class="pstatus_prod_app label label-primary">P</span>
+            <span class="pstatus_application label label-success">RNA-seq (total RNA)</span>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="pstatus_column" id="reception_control">
+        <h3>Sequencing</h3>
+    </div>
+</div>
+
+
+<script src="/static/js/jquery-ui.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $( ".pstatus_column" ).sortable({
+        connectWith: ".pstatus_column",
+        start: function (event, ui) {
+            ui.item.addClass('tilt');
+        },
+        stop: function (event, ui) {
+            ui.item.removeClass('tilt');
+        }
+    });
+});
+</script>
+
+{% end %}
