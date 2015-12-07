@@ -116,6 +116,19 @@ Description: Trello - like display of projects. Statuses and reponsibles etc.
         <li><a href="#">Num Samples</a></li>
       </ul>
     </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="colour_mode">Colour By</span> <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" id="colour-menu">
+        <li><a href="#">Age</a></li>
+        <li><a href="#">Name</a></li>
+        <li><a href="#">ID</a></li>
+        <li><a href="#">Project Type</a></li>
+        <li><a href="#">Application</a></li>
+        <li><a href="#">Num Samples</a></li>
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -145,6 +158,7 @@ Description: Trello - like display of projects. Statuses and reponsibles etc.
 
 
 <script src="/static/js/jquery-ui.min.js"></script>
+<!-- <script src="/static/js/chroma.min.js"></script> -->
 <script src="/static/js/moment.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -282,8 +296,18 @@ $(document).ready(function(){
               return a > b ? 1 : -1;
             }).appendTo($(this));
           }
-          $('.sorting_mode').text(mode);
         });
+        $('.sorting_mode').text(mode);
+      });
+      
+      //////
+      // COLOUR MODE
+      //////
+      $('#colour-menu li a').click(function(e){
+        var mode = $(this).text();
+        $('.pstatus_proj').each(function(){
+        });
+        $('.colour_mode').text(mode);
       });
       
     });
@@ -297,17 +321,26 @@ function load_data(target){
     // TODO - don't have a URL for this yet
     '#sequencing': '/api/v1/projects?list=pending_review',
   };
+  var ptype = {
+    'A': '#5c7aa0',
+    'P': '#629b58',
+  };
+  var apptype = {
+    'de novo': '#1b9e77',
+    'Epigenetics': '#d95f02',
+    'RNA-seq': '#7570b3',
+    'WG re-seq': '#e7298ao'
+  };
   return $.getJSON(urls[target], function(data) {
-    // console.log(data);
     $.each(data, function(project_id, proj) {
       var age = moment(proj.open_date, 'YYYY-MM-DD').fromNow();
       $(target+' .pstatus_wrapper').append('<div class="pstatus_proj draggable" id="pstatus_'+project_id+'">\
-          <h4><small><span class="pstatus_age label label-warning pull-right" data-opendate="'+proj.open_date+'">'+age+'</span></small>\
+          <h4><small><span class="pstatus_age pslabel pull-right" data-opendate="'+proj.open_date+'">'+age+'</span></small>\
           <span class="pstatus_name">'+proj.project_name+'</span> <small class="pstatus_pid">'+project_id+'</small></h4>\
-          <span class="pstatus_responsible pull-right label label-default">Phil Ewels</span>\
-          <span class="pstatus_prod_app label label-primary">'+proj.type.substr(0,1)+'</span>\
-          <span class="pstatus_application label label-success">'+proj.application+'</span>\
-          <span class="pstats_num_samples label label-info">'+proj.no_samples+' samples</span>\
+          <span class="pstatus_responsible pull-right pslabel">Phil Ewels</span>\
+          <span class="pstatus_prod_app pslabel" style="border-color:'+ptype[proj.type.substr(0,1)]+'">'+proj.type.substr(0,1)+'</span>\
+          <span class="pstatus_application pslabel" style="border-color:'+apptype[proj.application]+'">'+proj.application+'</span>\
+          <span class="pstats_num_samples pslabel">'+proj.no_samples+' samples</span>\
           <div class="clearfix"></div>\
       </div>');
     });
