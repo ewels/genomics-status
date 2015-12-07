@@ -985,7 +985,8 @@ Project Statuses Page
   -webkit-transform: rotate(-2deg);
 }
 .pstatus_proj.selected {
-	background-color: #feffe1;
+	background-color: #f9e78e;
+  box-shadow: 0 0 6px rgba(0,0,0,0.6);
 }
 .pstatus_proj.multiDrag:after, .pstatus_proj.multiDrag:before {
 	content: " ";
@@ -1003,7 +1004,7 @@ Project Statuses Page
 	z-index: -100;
 	top: 5px; left: 5px;
 	right: -5px; bottom: -5px;
-	background-color: #feffe1;
+	background-color: #f9e78e;
 }
 
 

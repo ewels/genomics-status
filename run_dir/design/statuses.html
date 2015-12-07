@@ -164,6 +164,8 @@ $(document).ready(function(){
       }
     });
     
+    var prevClicked = null;
+    
     // Wait for the data to load.
     $.when(load_data('#reception_control'), load_data('#library_prep'), load_data('#sequencing')).done(function(){
       
@@ -184,12 +186,23 @@ $(document).ready(function(){
       
       // Project events
       $('.pstatus_wrapper').on('click', '.pstatus_proj', function(e){
-        if (e.ctrlKey || e.metaKey) {
+        if (e.shiftKey && prevClicked){
+          var sibs = $(this).closest('.pstatus_column').find('.pstatus_proj');
+          var start = sibs.index($(this));
+          var end = sibs.index($('#'+prevClicked));
+          var selection = sibs.slice(Math.min(start,end), Math.max(start,end)+ 1);
+          if($('#'+prevClicked).hasClass('selected')){
+            selection.addClass('selected');
+          } else {
+            selection.removeClass('selected');
+          }
+        } else if (e.ctrlKey || e.metaKey) {
           $(this).toggleClass('selected');
-        } else {
+        } else  {
           $('.pstatus_proj').removeClass('selected');
           $(this).addClass('selected');
         }
+        prevClicked = $(this).attr('id');
       }).sortable({
         connectWith: '.pstatus_wrapper',
         delay: 150, // wait to see if this is a click
@@ -244,7 +257,7 @@ function load_data(target){
     // console.log(data);
     $.each(data, function(project_id, proj) {
       var age = moment(proj.open_date, 'YYYY-MM-DD').fromNow();
-      $(target+' .pstatus_wrapper').append('<div class="pstatus_proj draggable">\
+      $(target+' .pstatus_wrapper').append('<div class="pstatus_proj draggable" id="pstatus_'+project_id+'">\
           <h4><small><span class="pstats_num_samples label label-warning pull-right">'+age+'</span></small>\
           '+proj.project_name+' <small>'+project_id+'</small></h4>\
           <span class="pstatus_responsible pull-right label label-default">Phil Ewels</span>\
