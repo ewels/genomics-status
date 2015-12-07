@@ -25,6 +25,9 @@ Description: Trello - like display of projects. Statuses and reponsibles etc.
       
       <dt>Application Types</dt>
       <dd>Everything</dd>
+      
+      <dt>Sorted by</dt>
+      <dd class="sorting_mode">None</dd>
     </dl>
   </div>
   <div class="col-sm-4">
@@ -102,14 +105,15 @@ Description: Trello - like display of projects. Statuses and reponsibles etc.
     </div>
     <div class="btn-group">
       <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Sort <span class="caret"></span>
+        <span class="sorting_mode">Sort</span> <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu">
+      <ul class="dropdown-menu" id="sort-menu">
         <li><a href="#">Age</a></li>
         <li><a href="#">Name</a></li>
         <li><a href="#">ID</a></li>
         <li><a href="#">Project Type</a></li>
         <li><a href="#">Application</a></li>
+        <li><a href="#">Num Samples</a></li>
       </ul>
     </div>
   </div>
@@ -167,7 +171,8 @@ $(document).ready(function(){
     var prevClicked = null;
     
     // Wait for the data to load.
-    $.when(load_data('#reception_control'), load_data('#library_prep'), load_data('#sequencing')).done(function(){
+    // $.when(load_data('#reception_control'), load_data('#library_prep'), load_data('#sequencing')).done(function(){
+    $.when(load_data('#reception_control')).done(function(){
       
       $('#page_loading').remove();
         
@@ -239,7 +244,46 @@ $(document).ready(function(){
           $('.pstatus_proj').removeClass('tilt multiDrag');
           $('.pstatus_wrapper').removeClass('activeDragging');
           
+          $('dd.sorting_mode').text('None');
+          $('button .sorting_mode').text('Sort');
+          
         }
+      });
+      
+      //////
+      // SORTING
+      //////
+      var sort_classes = {
+        'Name': '.pstatus_name',
+        'ID': '.pstatus_pid',
+        'Project Type': '.pstatus_prod_app',
+        'Application': '.pstatus_application'
+      };
+      $('#sort-menu li a').click(function(e){
+        var mode = $(this).text();
+        $('.pstatus_wrapper').each(function(){
+          if(mode == 'Age'){
+            $(this).find('.pstatus_proj').sort(function(a,b){
+              var aDate = moment($(a).find(".pstatus_age").data('opendate'));
+              var bDate = moment($(b).find(".pstatus_age").data('opendate'));
+              return aDate > bDate ? 1 : -1;
+            }).appendTo($(this));
+          } else if(mode == 'Num Samples'){
+            $(this).find('.pstatus_proj').sort(function(a,b){
+              var a = parseFloat($(a).find('.pstats_num_samples').text().slice(0, -8));
+              var b = parseFloat($(b).find('.pstats_num_samples').text().slice(0, -8));
+              return a < b ? 1 : -1;
+            }).appendTo($(this));
+          } else {
+            var cl = sort_classes[mode];
+            $(this).find('.pstatus_proj').sort(function(a,b){
+              var a = $(a).find(cl).text().toLowerCase();
+              var b = $(b).find(cl).text().toLowerCase();
+              return a > b ? 1 : -1;
+            }).appendTo($(this));
+          }
+          $('.sorting_mode').text(mode);
+        });
       });
       
     });
@@ -258,8 +302,8 @@ function load_data(target){
     $.each(data, function(project_id, proj) {
       var age = moment(proj.open_date, 'YYYY-MM-DD').fromNow();
       $(target+' .pstatus_wrapper').append('<div class="pstatus_proj draggable" id="pstatus_'+project_id+'">\
-          <h4><small><span class="pstats_num_samples label label-warning pull-right">'+age+'</span></small>\
-          '+proj.project_name+' <small>'+project_id+'</small></h4>\
+          <h4><small><span class="pstatus_age label label-warning pull-right" data-opendate="'+proj.open_date+'">'+age+'</span></small>\
+          <span class="pstatus_name">'+proj.project_name+'</span> <small class="pstatus_pid">'+project_id+'</small></h4>\
           <span class="pstatus_responsible pull-right label label-default">Phil Ewels</span>\
           <span class="pstatus_prod_app label label-primary">'+proj.type.substr(0,1)+'</span>\
           <span class="pstatus_application label label-success">'+proj.application+'</span>\
