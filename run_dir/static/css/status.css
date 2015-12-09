@@ -1016,4 +1016,9 @@ Project Statuses Page
   margin: 5px;
 }
 
+.pstatus_proj .colour_hl {
+	font-weight: 700;
+	color: #FFF;
+}
+
 

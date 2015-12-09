@@ -121,12 +121,13 @@ Description: Trello - like display of projects. Statuses and reponsibles etc.
         <span class="colour_mode">Colour By</span> <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" id="colour-menu">
+        <li><a href="#">Clear (none)</a></li>
+        <li role="separator" class="divider"></li>
         <li><a href="#">Age</a></li>
-        <li><a href="#">Name</a></li>
-        <li><a href="#">ID</a></li>
         <li><a href="#">Project Type</a></li>
         <li><a href="#">Application</a></li>
         <li><a href="#">Num Samples</a></li>
+        <li><a href="#">Responsible</a></li>
       </ul>
     </div>
   </div>
@@ -158,7 +159,7 @@ Description: Trello - like display of projects. Statuses and reponsibles etc.
 
 
 <script src="/static/js/jquery-ui.min.js"></script>
-<!-- <script src="/static/js/chroma.min.js"></script> -->
+<script src="/static/js/chroma.min.js"></script>
 <script src="/static/js/moment.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -271,7 +272,10 @@ $(document).ready(function(){
         'Name': '.pstatus_name',
         'ID': '.pstatus_pid',
         'Project Type': '.pstatus_prod_app',
-        'Application': '.pstatus_application'
+        'Application': '.pstatus_application',
+        'Age': '.pstatus_age',
+        'Num Samples': '.pstats_num_samples',
+        'Responsible': '.pstatus_responsible',
       };
       $('#sort-menu li a').click(function(e){
         var mode = $(this).text();
@@ -305,7 +309,18 @@ $(document).ready(function(){
       //////
       $('#colour-menu li a').click(function(e){
         var mode = $(this).text();
+        // Reset
+        $('.pslabel').removeClass('colour_hl').css('background-color', 'transparent');
+        $('.pstatus_proj').css('background-color', '#fcfcfc');
+        // Go through each project
         $('.pstatus_proj').each(function(){
+          if(mode != 'Clear (none)'){
+            var cl = sort_classes[mode];
+            var thiscol = $(this).find(cl).css('border-color');
+            $(this).find(cl).css('background-color', thiscol).addClass('colour_hl');
+            thiscol = chroma(thiscol).alpha(0.2).css();
+            $(this).css('background-color', thiscol);
+          }
         });
         $('.colour_mode').text(mode);
       });
@@ -329,7 +344,8 @@ function load_data(target){
     'de novo': '#1b9e77',
     'Epigenetics': '#d95f02',
     'RNA-seq': '#7570b3',
-    'WG re-seq': '#e7298ao'
+    'WG re-seq': '#e7298a',
+    'Target re-seq': '#66a61e'
   };
   return $.getJSON(urls[target], function(data) {
     $.each(data, function(project_id, proj) {
